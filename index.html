@@ -10,193 +10,90 @@
 
   <style>
     :root{
-      --bg: #eef1ff;
-      --card: #ffffff;
-      --text: #111827;
-      --muted: #6b7280;
-      --line: rgba(17,24,39,.08);
-      --primary: #5b5ce6;
-      --primary-2: #7c3aed;
-      --success: #10b981;
-      --warning: #f59e0b;
-      --danger: #ef4444;
-      --shadow: 0 10px 30px rgba(17,24,39,.10);
-      --radius: 22px;
+      --bg:#eef1ff; --text:#111827; --muted:#6b7280; --line:rgba(17,24,39,.08);
+      --primary:#5b5ce6; --primary2:#7c3aed;
+      --success:#10b981; --danger:#ef4444; --shadow:0 10px 30px rgba(17,24,39,.10);
+      --radius:22px;
     }
-    *{ box-sizing: border-box; }
+    *{box-sizing:border-box}
     body{
-      margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: radial-gradient(1200px 700px at 20% 10%, #ffffff 0%, var(--bg) 55%, #f6f7ff 100%);
-      color: var(--text);
-      padding: 18px;
+      margin:0; padding:18px;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:radial-gradient(1200px 700px at 20% 10%, #fff 0%, var(--bg) 55%, #f6f7ff 100%);
+      color:var(--text);
     }
-
-    .phone{ max-width: 420px; margin: 0 auto; border-radius: 32px; background: rgba(255,255,255,.55); padding: 14px; }
+    .phone{max-width:420px;margin:0 auto;border-radius:32px;background:rgba(255,255,255,.55);padding:14px}
     .app{
-      background: rgba(255,255,255,.75);
-      border: 1px solid rgba(255,255,255,.6);
-      border-radius: 28px;
-      padding: 18px 16px 16px;
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(10px);
+      background:rgba(255,255,255,.75); border:1px solid rgba(255,255,255,.6);
+      border-radius:28px; padding:18px 16px 16px; box-shadow:var(--shadow);
+      backdrop-filter:blur(10px);
     }
-
-    .topbar{ display:flex; align-items:center; justify-content:space-between; margin-bottom: 14px; }
-    .month{ font-size: 22px; font-weight: 800; letter-spacing: -.02em; }
-    .right{ display:flex; gap:10px; align-items:center; }
-
-    .iconbtn{
-      width: 38px; height: 38px; border-radius: 12px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.9);
-      display:grid; place-items:center; cursor:pointer;
-    }
-    .iconbtn:active{ transform: translateY(1px); }
-
+    .topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+    .month{font-size:22px;font-weight:900;letter-spacing:-.02em}
+    .right{display:flex;gap:10px;align-items:center}
     .reload{
-      padding: 10px 12px; border-radius: 12px; border: 0; cursor:pointer;
-      color: white; font-weight: 700;
-      background: linear-gradient(135deg, var(--primary), var(--primary-2));
-      box-shadow: 0 10px 20px rgba(91,92,230,.25);
+      padding:10px 12px;border-radius:12px;border:0;cursor:pointer;color:#fff;font-weight:900;
+      background:linear-gradient(135deg,var(--primary),var(--primary2));
+      box-shadow:0 10px 20px rgba(91,92,230,.25)
     }
-    .reload:active{ transform: translateY(1px); }
-
-    .statusline{
-      font-size: 12px; color: var(--muted);
-      margin: 8px 0 14px;
-      display:flex; gap:10px; align-items:center; flex-wrap:wrap;
+    .reload:active{transform:translateY(1px)}
+    .iconbtn{
+      width:38px;height:38px;border-radius:12px;border:1px solid var(--line);
+      background:rgba(255,255,255,.9);display:grid;place-items:center;cursor:pointer
     }
-    .pill{
-      display:inline-flex; align-items:center; gap:6px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.85);
-      padding: 6px 10px;
-      border-radius: 999px;
-      font-size: 12px; color: var(--muted);
-    }
-    .dot{ width:8px; height:8px; border-radius:999px; background: var(--muted); display:inline-block; }
-    .dot.ok{ background: var(--success); }
-    .dot.bad{ background: var(--danger); }
-
-    .section-title{
-      font-weight: 800; letter-spacing: -.02em;
-      margin: 14px 0 10px;
-      display:flex; align-items:center; justify-content:space-between;
-    }
-    .section-title small{ color: var(--muted); font-weight: 700; }
-
+    .iconbtn.small{width:32px;height:32px;border-radius:10px;font-size:14px}
+    .iconbtn:active{transform:translateY(1px)}
+    .statusline{font-size:12px;color:var(--muted);margin:8px 0 14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    .pill{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:rgba(255,255,255,.85);padding:6px 10px;border-radius:999px}
+    .dot{width:8px;height:8px;border-radius:999px;background:var(--muted)}
+    .dot.ok{background:var(--success)} .dot.bad{background:var(--danger)}
+    .checklist{margin:6px 0 14px;color:var(--muted);font-size:12px;line-height:1.6}
+    .checklist b{color:#111827}
+    .section-title{font-weight:900;letter-spacing:-.02em;margin:14px 0 10px;display:flex;align-items:center;justify-content:space-between}
+    .section-title small{color:var(--muted);font-weight:800}
     .task{
-      background: rgba(255,255,255,.92);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 12px 12px;
-      display:flex;
-      gap: 12px;
-      align-items:flex-start;
-      box-shadow: 0 10px 20px rgba(17,24,39,.06);
-      margin-bottom: 10px;
+      background:rgba(255,255,255,.92); border:1px solid var(--line); border-radius:var(--radius);
+      padding:12px; display:flex; gap:12px; align-items:flex-start;
+      box-shadow:0 10px 20px rgba(17,24,39,.06); margin-bottom:10px;
     }
     .badge{
-      width: 44px; height: 44px; border-radius: 16px;
-      display:grid; place-items:center;
-      background: rgba(91,92,230,.12);
-      border: 1px solid rgba(91,92,230,.22);
-      color: var(--primary);
-      font-weight: 900;
-      flex: 0 0 auto;
-      margin-top: 2px;
+      width:44px;height:44px;border-radius:16px;display:grid;place-items:center;
+      background:rgba(91,92,230,.12);border:1px solid rgba(91,92,230,.22);
+      color:var(--primary);font-weight:1000;flex:0 0 auto;
     }
-    .task-main{ flex:1; min-width: 0; }
-    .task-title{
-      font-weight: 900; margin:0; font-size: 14px; letter-spacing: -.01em;
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    }
-
-    .task-sub{
-      margin-top: 8px;
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-    }
-
-    .chip{
-      font-size: 11px; font-weight: 800;
-      padding: 7px 10px;
-      border-radius: 14px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.85);
-      color: var(--muted);
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 8px;
-    }
-
-    .chip.order{ background: rgba(245,158,11,.12); border-color: rgba(245,158,11,.25); color: #9a6b10; }
-    .chip.none{ background: rgba(107,114,128,.10); border-color: rgba(107,114,128,.18); color: #6b7280; }
-
-    .chip input{
-      width: 70px;
-      border: 0;
-      outline: none;
-      background: transparent;
-      color: var(--text);
-      font-weight: 900;
-      font-variant-numeric: tabular-nums;
-      text-align: right;
-    }
-    .chip select{
-      border:0;
-      outline:none;
-      background: transparent;
-      color: var(--text);
-      font-weight: 900;
-    }
-    .chip .label{ opacity:.9; white-space: nowrap; }
-
+    .task-main{flex:1;min-width:0}
+    .task-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+    .task-title{margin:0;font-weight:1000;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .task-sub{margin-top:6px;font-size:12px;color:var(--muted);display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+    .chip{font-size:11px;font-weight:900;padding:5px 8px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.85);color:var(--muted)}
+    .chip.order{background:rgba(245,158,11,.12);border-color:rgba(245,158,11,.25);color:#9a6b10}
+    .chip.none{background:rgba(107,114,128,.10);border-color:rgba(107,114,128,.18);color:#6b7280}
     .need{
-      font-variant-numeric: tabular-nums;
-      font-weight: 900;
-      padding: 6px 10px;
-      border-radius: 12px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.9);
-      min-width: 58px;
-      text-align: center;
-      flex: 0 0 auto;
-      align-self: center;
-      margin-top: 6px;
+      font-variant-numeric:tabular-nums;font-weight:1000;padding:6px 10px;border-radius:12px;
+      border:1px solid var(--line);background:rgba(255,255,255,.9);min-width:58px;text-align:center;flex:0 0 auto;margin-top:2px
     }
-    .need.good{ color: var(--danger); border-color: rgba(239,68,68,.25); background: rgba(239,68,68,.08); }
-    .need.ok{ color: var(--success); border-color: rgba(16,185,129,.25); background: rgba(16,185,129,.08); }
-    .need.zero{ color: var(--muted); }
-
-    .actions{
-      display:flex;
-      flex-direction: column;
-      gap: 8px;
-      align-items: stretch;
-      margin-top: 6px;
+    .need.ok{color:var(--success);border-color:rgba(16,185,129,.25);background:rgba(16,185,129,.08)}
+    .need.good{color:var(--danger);border-color:rgba(239,68,68,.25);background:rgba(239,68,68,.08)}
+    .need.zero{color:var(--muted)}
+    .editor{
+      margin-top:10px;padding:10px;border:1px dashed rgba(17,24,39,.18);border-radius:16px;
+      background:rgba(255,255,255,.85);display:none
     }
-    .savebtn{
-      padding: 8px 10px;
-      border-radius: 12px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.92);
-      cursor:pointer;
-      font-weight: 900;
+    .editor.open{display:block}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .field label{display:block;font-size:11px;font-weight:900;color:var(--muted);margin-bottom:6px}
+    .field input,.field select{width:100%;padding:10px;border-radius:12px;border:1px solid rgba(17,24,39,.12);background:#fff;font-size:13px;outline:none}
+    .actions{display:flex;gap:10px;margin-top:10px;justify-content:flex-end;align-items:center}
+    .btn{padding:10px 12px;border-radius:12px;border:1px solid rgba(17,24,39,.10);background:rgba(255,255,255,.95);cursor:pointer;font-weight:1000;font-size:12px}
+    .btn.primary{border:0;color:#fff;background:linear-gradient(135deg,var(--primary),var(--primary2));box-shadow:0 10px 20px rgba(91,92,230,.22)}
+    .btn:active{transform:translateY(1px)}
+    .toast{
+      position:fixed;left:50%;bottom:18px;transform:translateX(-50%);
+      background:rgba(17,24,39,.92);color:#fff;padding:10px 12px;border-radius:12px;
+      font-size:12px;font-weight:900;opacity:0;pointer-events:none;transition:opacity .18s ease;max-width:92vw;text-align:center
     }
-    .savebtn.primary{
-      color: white;
-      border: 0;
-      background: linear-gradient(135deg, var(--primary), var(--primary-2));
-      box-shadow: 0 10px 18px rgba(91,92,230,.20);
-    }
-    .savebtn:disabled{ opacity: .6; cursor:not-allowed; }
-
-    .footer-note{ margin-top: 12px; font-size: 12px; color: var(--muted); }
-    .error{ color: var(--danger); font-weight: 800; }
+    .toast.show{opacity:1}
+    .error{color:var(--danger);font-weight:1000}
   </style>
 </head>
 
@@ -204,46 +101,67 @@
   <div class="phone">
     <div class="app">
       <div class="topbar">
-        <div class="month" id="monthText">재고 현황</div>
+        <div class="month">재고 현황</div>
         <div class="right">
           <button class="reload" id="reloadBtn" type="button">Reload</button>
-          <button class="iconbtn" id="openCsvBtn" type="button" title="CSV 열기" aria-label="CSV 열기">🔗</button>
+          <button class="iconbtn" id="openCsvBtn" type="button" title="CSV 열기">🔗</button>
         </div>
       </div>
 
-      <div class="statusline" id="statusLine">
+      <div class="statusline">
         <span class="pill"><span class="dot" id="dot"></span><span id="statusText">불러오는 중…</span></span>
         <span class="pill">Rows: <b id="rowsCount">-</b></span>
         <span class="pill">Updated: <b id="updatedAt">-</b></span>
       </div>
 
-      <div id="list"></div>
-
-      <div class="footer-note">
+      <div class="checklist">
         ✅ 스프레드시트 값 변경 → <b>Reload</b><br/>
         ✅ 웹에서 값 수정 → <b>Save</b> → 스프레드시트에 반영
       </div>
+
+      <div id="list"></div>
     </div>
   </div>
 
+  <div class="toast" id="toast"></div>
+
 <script>
-  /***** 1) 읽기(CSV) *****/
-  const SHEET_URL =
-    "https://docs.google.com/spreadsheets/d/e/2PACX-1vQj502UJ7RPuSmXEAGx6d5W4O9JKxrcz-zL7afDTJXOEYLOa2K1Tjw3118RrpNBjfjPNF0eV4s15BZX/pub?output=csv";
+  /**
+   * =========================
+   * 반드시 본인 값으로 수정
+   * =========================
+   */
 
-  /***** 2) 쓰기(Apps Script Web App) *****/
-  const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbziRjAzN3ezrJ86decGH9_VfDDrYfcQplvz85w4DnnJG5kXCRb4CpAgjOH2Pz5MB5vGLA/exec"; // ✅ 여기! /exec 로 끝나는 URL 붙여넣기
-  const API_KEY = ""; // ✅ Apps Script의 API_KEY와 동일(테스트면 "")
+  // (1) CSV 링크: "웹에 게시"로 얻은 output=csv 링크 사용
+  const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQj502UJ7RPuSmXEAGx6d5W4O9JKxrcz-zL7afDTJXOEYLOa2K1Tjw3118RrpNBjfjPNF0eV4s15BZX/pub?output=csv";
 
+  // (2) Apps Script 웹앱 /exec (ping 성공했던 URL)
+  const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbziRjAzN3ezrJ86decGH9_VfDDrYfcQplvz85w4DnnJG5kXCRb4CpAgjOH2Pz5MB5vGLA/exec";
+
+  // (선택) Apps Script에서 API_KEY를 쓰는 경우만 동일하게 입력
+  const API_KEY = "";
+
+  /**
+   * =========================
+   * UI
+   * =========================
+   */
   const statusText = document.getElementById("statusText");
   const dot = document.getElementById("dot");
   const rowsCount = document.getElementById("rowsCount");
   const updatedAt = document.getElementById("updatedAt");
   const list = document.getElementById("list");
+  const toastEl = document.getElementById("toast");
 
   document.getElementById("reloadBtn").addEventListener("click", load);
   document.getElementById("openCsvBtn").addEventListener("click", () => window.open(SHEET_URL, "_blank"));
 
+  function toast(msg){
+    toastEl.textContent = msg;
+    toastEl.classList.add("show");
+    clearTimeout(toastEl._t);
+    toastEl._t = setTimeout(() => toastEl.classList.remove("show"), 2200);
+  }
   function setStatus(msg, ok=null){
     statusText.textContent = msg;
     dot.classList.remove("ok","bad");
@@ -251,14 +169,17 @@
     if (ok === false) dot.classList.add("bad");
   }
 
+  /**
+   * =========================
+   * CSV helpers
+   * =========================
+   */
   function normalizeHeader(h){
     const s = String(h || "").trim();
-    if (!s) return "";
     const low = s.toLowerCase();
     if (low === "currcnt") return "Current";
     return s;
   }
-
   function forwardFill(rows, idx){
     let last = "";
     for (const r of rows){
@@ -268,19 +189,16 @@
     }
     return rows;
   }
-
   function num(v){
     const n = Number(String(v ?? "").trim());
     return Number.isFinite(n) ? n : null;
   }
-
   function chipClass(status){
     const s = String(status ?? "").trim().toLowerCase();
     if (s === "order") return "chip order";
     if (s === "none") return "chip none";
     return "chip";
   }
-
   function needClass(need){
     const n = num(need);
     if (n === null) return "need zero";
@@ -288,7 +206,6 @@
     if (n < 0) return "need good";
     return "need zero";
   }
-
   function groupBySubject(rows, subjectIdx){
     const groups = new Map();
     for (const r of rows){
@@ -298,64 +215,10 @@
     }
     return groups;
   }
-
   function escapeHtml(s){
     return String(s ?? "")
-      .replaceAll("&","&amp;")
-      .replaceAll("<","&lt;")
-      .replaceAll(">","&gt;")
-      .replaceAll('"',"&quot;")
-      .replaceAll("'","&#039;");
-  }
-
-  /***** JSONP 호출 (Apps Script CORS 회피용) *****/
-  function jsonp(url){
-    return new Promise((resolve, reject) => {
-      const cb = "cb_" + Math.random().toString(36).slice(2);
-      const script = document.createElement("script");
-      const timeout = setTimeout(() => {
-        cleanup();
-        reject(new Error("timeout"));
-      }, 12000);
-
-      window[cb] = (data) => {
-        cleanup();
-        resolve(data);
-      };
-
-      function cleanup(){
-        clearTimeout(timeout);
-        try { delete window[cb]; } catch(e) { window[cb] = undefined; }
-        script.remove();
-      }
-
-      script.onerror = () => {
-        cleanup();
-        reject(new Error("jsonp error"));
-      };
-
-      script.src = url + (url.includes("?") ? "&" : "?") + "callback=" + encodeURIComponent(cb);
-      document.body.appendChild(script);
-    });
-  }
-
-  async function updateToSheet({title, current, tobe, status, result}){
-    if (!WEBAPP_URL || WEBAPP_URL.includes("PUT_YOUR_EXEC_URL_HERE")) {
-      throw new Error("WEBAPP_URL을 /exec URL로 설정해 주세요.");
-    }
-
-    const qs = new URLSearchParams();
-    qs.set("action", "update");
-    qs.set("apiKey", API_KEY);
-    qs.set("title", title);
-    qs.set("current", current);
-    qs.set("tobe", tobe);
-    qs.set("status", status);
-    qs.set("result", result);
-    qs.set("t", String(Date.now())); // 캐시 방지
-
-    const url = WEBAPP_URL + (WEBAPP_URL.includes("?") ? "&" : "?") + qs.toString();
-    return await jsonp(url);
+      .replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")
+      .replaceAll('"',"&quot;").replaceAll("'","&#039;");
   }
 
   function render(groups, idx){
@@ -363,12 +226,20 @@
 
     for (const [subject, rows] of groups.entries()){
       const section = document.createElement("div");
+
       const title = document.createElement("div");
       title.className = "section-title";
       title.innerHTML = `<span>Subject ${escapeHtml(subject)}</span><small>${rows.length} items</small>`;
       section.appendChild(title);
 
       rows.forEach(r => {
+        const titleText = String(r[idx.title] ?? "").trim();
+        const current = String(r[idx.current] ?? "").trim();
+        const tobe = String(r[idx.tobe] ?? "").trim();
+        const need = String(r[idx.need] ?? "").trim();
+        const status = String(r[idx.status] ?? "").trim();
+        const result = String(r[idx.result] ?? "").trim();
+
         const task = document.createElement("div");
         task.className = "task";
 
@@ -379,93 +250,146 @@
         const main = document.createElement("div");
         main.className = "task-main";
 
+        const top = document.createElement("div");
+        top.className = "task-top";
+
         const h = document.createElement("p");
         h.className = "task-title";
-        const rowTitle = String(r[idx.title] ?? "").trim();
-        h.textContent = rowTitle;
+        h.textContent = titleText;
 
-        const current = String(r[idx.current] ?? "").trim();
-        const tobe = String(r[idx.tobe] ?? "").trim();
-        const need = String(r[idx.need] ?? "").trim();
-        const status = String(r[idx.status] ?? "").trim();
-        const result = String(r[idx.result] ?? "").trim();
+        const editBtn = document.createElement("button");
+        editBtn.className = "iconbtn small";
+        editBtn.type = "button";
+        editBtn.title = "Edit";
+        editBtn.textContent = "✏️";
+
+        top.appendChild(h);
+        top.appendChild(editBtn);
 
         const sub = document.createElement("div");
         sub.className = "task-sub";
-
         sub.innerHTML = `
-          <div class="chip"><span class="label">Current</span>
-            <input type="number" class="inp-current" value="${escapeHtml(current)}" />
+          <span class="chip">Current: <b>${escapeHtml(current)}</b></span>
+          <span class="chip">To be: <b>${escapeHtml(tobe)}</b></span>
+          <span class="${chipClass(status)}">Status: <b>${escapeHtml(status)}</b></span>
+          <span class="chip">Result: <b>${escapeHtml(result)}</b></span>
+        `;
+
+        const editor = document.createElement("div");
+        editor.className = "editor";
+        editor.innerHTML = `
+          <div class="grid">
+            <div class="field">
+              <label>Current</label>
+              <input inputmode="numeric" type="number" step="1" class="edit-current" value="${escapeHtml(current)}" />
+            </div>
+            <div class="field">
+              <label>To be</label>
+              <input inputmode="numeric" type="number" step="1" class="edit-tobe" value="${escapeHtml(tobe)}" />
+            </div>
+            <div class="field">
+              <label>Status</label>
+              <select class="edit-status">
+                <option value="">(blank)</option>
+                <option value="none">none</option>
+                <option value="order">order</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Result</label>
+              <input type="text" class="edit-result" value="${escapeHtml(result)}" />
+            </div>
           </div>
-          <div class="chip"><span class="label">To be</span>
-            <input type="number" class="inp-tobe" value="${escapeHtml(tobe)}" />
-          </div>
-          <div class="${chipClass(status)}"><span class="label">Status</span>
-            <select class="inp-status">
-              <option value="none" ${status.toLowerCase()==="none"?"selected":""}>none</option>
-              <option value="order" ${status.toLowerCase()==="order"?"selected":""}>order</option>
-            </select>
-          </div>
-          <div class="chip"><span class="label">Result</span>
-            <input type="text" class="inp-result" value="${escapeHtml(result)}" />
+          <div class="actions">
+            <button class="btn" type="button" data-act="cancel">Cancel</button>
+            <button class="btn primary" type="button" data-act="save">Save</button>
           </div>
         `;
+
+        const statusSel = editor.querySelector(".edit-status");
+        statusSel.value = status;
 
         const needBox = document.createElement("div");
         needBox.className = needClass(need);
         needBox.textContent = need;
 
-        const actions = document.createElement("div");
-        actions.className = "actions";
+        const curInput = editor.querySelector(".edit-current");
+        const tobeInput = editor.querySelector(".edit-tobe");
+        function updateNeedPreview(){
+          const c = num(curInput.value);
+          const t = num(tobeInput.value);
+          if (c === null || t === null) return;
+          const n = t - c;
+          needBox.textContent = String(n);
+          needBox.className = "need " + (n > 0 ? "ok" : n < 0 ? "good" : "zero");
+        }
+        curInput.addEventListener("input", updateNeedPreview);
+        tobeInput.addEventListener("input", updateNeedPreview);
 
-        const saveBtn = document.createElement("button");
-        saveBtn.className = "savebtn primary";
-        saveBtn.textContent = "Save";
+        editBtn.addEventListener("click", () => editor.classList.toggle("open"));
 
-        saveBtn.addEventListener("click", async () => {
-          try{
-            saveBtn.disabled = true;
-            setStatus(`저장 중… (${rowTitle})`, null);
+        editor.addEventListener("click", async (ev) => {
+          const act = ev.target?.dataset?.act;
+          if (!act) return;
 
-            const newCurrent = task.querySelector(".inp-current").value;
-            const newTobe = task.querySelector(".inp-tobe").value;
-            const newStatus = task.querySelector(".inp-status").value;
-            const newResult = task.querySelector(".inp-result").value;
+          if (act === "cancel"){
+            curInput.value = current;
+            tobeInput.value = tobe;
+            statusSel.value = status;
+            editor.querySelector(".edit-result").value = result;
+            needBox.textContent = need;
+            needBox.className = needClass(need);
+            editor.classList.remove("open");
+            return;
+          }
 
-            const res = await updateToSheet({
-              title: rowTitle,
-              current: newCurrent,
-              tobe: newTobe,
-              status: newStatus,
-              result: newResult
-            });
+          if (act === "save"){
+            const newCurrent = curInput.value;
+            const newTobe = tobeInput.value;
+            const newStatus = statusSel.value;
+            const newResult = editor.querySelector(".edit-result").value;
 
-            if (!res || res.ok !== true) {
-              throw new Error(res?.error || "unknown error");
+            if (!titleText){
+              toast("Title이 비어있어서 저장할 수 없어요.");
+              return;
+            }
+            if (!WEBAPP_URL || WEBAPP_URL.includes("PASTE_YOUR_EXEC_URL_HERE")){
+              toast("WEBAPP_URL에 /exec 주소를 넣어주세요.");
+              return;
             }
 
-            setStatus(`저장 완료 ✅ (${rowTitle})`, true);
+            toast("저장 요청 전송 중…");
+            try{
+              await saveToSheet({
+                title: titleText,
+                current: newCurrent,
+                tobe: newTobe,
+                status: newStatus,
+                result: newResult
+              });
 
-            // 저장 후 필요하면 자동 Reload (검증용)
-            await load();
-
-          }catch(e){
-            setStatus("저장 실패: " + (e?.message || e), false);
-            console.error(e);
-          }finally{
-            saveBtn.disabled = false;
+              sub.innerHTML = `
+                <span class="chip">Current: <b>${escapeHtml(newCurrent)}</b></span>
+                <span class="chip">To be: <b>${escapeHtml(newTobe)}</b></span>
+                <span class="${chipClass(newStatus)}">Status: <b>${escapeHtml(newStatus)}</b></span>
+                <span class="chip">Result: <b>${escapeHtml(newResult)}</b></span>
+              `;
+              editor.classList.remove("open");
+              toast("저장 요청 완료! 2~5초 후 Reload 해보세요.");
+            }catch(e){
+              console.error(e);
+              toast("저장 실패 (콘솔 확인).");
+            }
           }
         });
 
-        actions.appendChild(saveBtn);
-
-        main.appendChild(h);
+        main.appendChild(top);
         main.appendChild(sub);
+        main.appendChild(editor);
 
         task.appendChild(badge);
         task.appendChild(main);
         task.appendChild(needBox);
-        task.appendChild(actions);
 
         section.appendChild(task);
       });
@@ -481,29 +405,36 @@
       updatedAt.textContent = "-";
       list.innerHTML = "";
 
+      // 캐시 방지
       const url = SHEET_URL + (SHEET_URL.includes("?") ? "&" : "?") + "t=" + Date.now();
       const res = await fetch(url, { cache: "no-store" });
       if (!res.ok) throw new Error("CSV fetch failed: " + res.status);
 
       const csvText = await res.text();
-      const parsed = Papa.parse(csvText, { skipEmptyLines: true });
 
+      // ✅ CSV가 아니라 HTML이 오면 여기서 바로 잡아줌
+      if (csvText.trim().startsWith("<")){
+        throw new Error("CSV 링크가 HTML을 반환합니다. (publish CSV 링크를 다시 확인하세요)");
+      }
+
+      if (typeof Papa === "undefined"){
+        throw new Error("PapaParse 로드 실패(네트워크/차단).");
+      }
+
+      const parsed = Papa.parse(csvText, { skipEmptyLines: true });
       if (!parsed.data || parsed.data.length < 2) throw new Error("CSV 데이터가 비어있습니다.");
 
       const rows = parsed.data.map(r => r.map(c => String(c ?? "")));
 
-      // 헤더 찾기
       let headerRowIndex = -1;
-      for (let i=0; i<rows.length; i++){
+      for (let i=0;i<rows.length;i++){
         const low = rows[i].map(x => x.trim().toLowerCase());
-        if (low.includes("subject") && low.includes("title")){
-          headerRowIndex = i; break;
-        }
+        if (low.includes("subject") && low.includes("title")) { headerRowIndex = i; break; }
       }
       if (headerRowIndex === -1) headerRowIndex = 0;
 
       const headers = rows[headerRowIndex].map(normalizeHeader);
-      const dataRows = rows.slice(headerRowIndex + 1).filter(r => r.some(v => String(v ?? "").trim() !== ""));
+      const dataRows = rows.slice(headerRowIndex + 1);
 
       const hLow = headers.map(h => String(h).trim().toLowerCase());
       const idx = {
@@ -516,17 +447,46 @@
         result: hLow.indexOf("result")
       };
 
-      if (idx.subject < 0 || idx.title < 0) throw new Error("헤더에 Subject/Title 컬럼이 없습니다.");
+      if (idx.subject < 0 || idx.title < 0){
+        throw new Error("헤더에 Subject/Title 컬럼이 없습니다. (시트 헤더 철자 확인)");
+      }
 
-      forwardFill(dataRows, idx.subject);
+      const cleaned = dataRows.filter(r => r.some(v => String(v ?? "").trim() !== ""));
+      forwardFill(cleaned, idx.subject);
 
-      const groups = groupBySubject(dataRows, idx.subject);
+      const groups = groupBySubject(cleaned, idx.subject);
       render(groups, idx);
 
-      rowsCount.textContent = String(dataRows.length);
+      rowsCount.textContent = String(cleaned.length);
       updatedAt.textContent = new Date().toLocaleString();
       setStatus("정상 로드 완료", true);
-
     }catch(e){
       setStatus("로드 실패: " + (e?.message || e), false);
-      list.innerHTML = `<div class="error">데이터를 불러오지 못했습니다.
+      list.innerHTML = `<div class="error">데이터를 불러오지 못했습니다.<br/>${escapeHtml(e?.message || String(e))}</div>`;
+      console.error(e);
+    }
+  }
+
+  /**
+   * 웹 → Apps Script → Sheet 업데이트
+   * - CORS 때문에 응답을 못 읽는 경우가 많아서 "전송만" 성공 처리합니다.
+   */
+  async function saveToSheet({ title, current, tobe, status, result }){
+    const body = new URLSearchParams();
+    body.set("action", "update");
+    body.set("title", title);
+    if (API_KEY) body.set("api_key", API_KEY);
+    body.set("current", current ?? "");
+    body.set("tobe", tobe ?? "");
+    body.set("status", status ?? "");
+    body.set("result", result ?? "");
+
+    // no-cors로 전송(응답은 못 읽어도 업데이트는 됨)
+    await fetch(WEBAPP_URL, { method:"POST", mode:"no-cors", body });
+    return true;
+  }
+
+  load();
+</script>
+</body>
+</html>
