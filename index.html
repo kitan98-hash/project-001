@@ -243,7 +243,7 @@
 <script>
   // ✅ 본인 CSV 링크 그대로 사용
   const SHEET_URL =
-    "https://docs.google.com/spreadsheets/d/e/2PACX-1vQj502UJ7RPuSmXEAGx6d5W4O9JKxrcz-zL7afDTJXOEYLOa2K1Tjw3118RrpNBjfjPNF0eV4s15BZX/pub?gid=0&single=true&output=csv";
+    "https://docs.google.com/spreadsheets/d/e/2PACX-1vQj502UJ7RPuSmXEAGx6d5W4O9JKxrcz-zL7afDTJXOEYLOa2K1Tjw3118RrpNBjfjPNF0eV4s15BZX/pub?output=csv";
 
   const statusText = document.getElementById("statusText");
   const dot = document.getElementById("dot");
@@ -269,7 +269,7 @@
     return s;
   }
 
-  // "Subject" 같은 병합 셀로 생기는 빈칸을 위 값으로 채우기
+  // "subject" 같은 병합 셀로 생기는 빈칸을 위 값으로 채우기
   function forwardFill(rows, idx){
     let last = "";
     for (const r of rows){
