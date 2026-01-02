@@ -1,35 +1,43 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Inventory</title>
-
-<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
-
-<style>
-:root {
-  --primary:#5B5CFF;
-  --bg:#F3F4FF;
-  --card:#ffffff;
-  --text:#1f2937;
-  --muted:#6b7280;
-}
-
-body {
-  margin:0;
-  background:var(--bg);
-  font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
-}
-
-.container {
-  max-width:420px;
-  margin:auto;
-  padding:20px 16px 80px;
-}
-
-.header {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:20
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inventory Data</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 40px; background-color: #f4f4f4; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+    th { background-color: #333; color: white; }
+    tr:nth-child(even) { background-color: #f9f9f9; }
+  </style>
+</head>
+<body>
+  <h1>재고 현황</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Subject</th>
+        <th>Title</th>
+        <th>Current</th>
+        <th>to be</th>
+        <th>Need</th>
+        <th>Status</th>
+        <th>Result</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>A</td><td>항목-001</td><td>15</td><td>5</td><td>-10</td><td>none</td><td>-</td></tr>
+      <tr><td>A</td><td>항목-002</td><td>3</td><td>5</td><td>2</td><td>order</td><td>-</td></tr>
+      <tr><td>A</td><td>항목-003</td><td>2</td><td>5</td><td>3</td><td>order</td><td>-</td></tr>
+      <tr><td>A</td><td>항목-004</td><td>1</td><td>5</td><td>4</td><td>order</td><td>-</td></tr>
+      <tr><td>B</td><td>항목-005</td><td>0</td><td>5</td><td>5</td><td>order</td><td>-</td></tr>
+      <tr><td>B</td><td>항목-006</td><td>1</td><td>5</td><td>4</td><td>order</td><td>-</td></tr>
+      <tr><td>B</td><td>항목-007</td><td>3</td><td>5</td><td>2</td><td>order</td><td>-</td></tr>
+      <tr><td>B</td><td>항목-008</td><td>2</td><td>5</td><td>3</td><td>order</td><td>-</td></tr>
+      <tr><td>C</td><td>항목-009</td><td>1</td><td>5</td><td>4</td><td>order</td><td>-</td></tr>
+      <tr><td>C</td><td>항목-010</td><td>0</td><td>5</td><td>5</td><td>order</td><td>-</td></tr>
+    </tbody>
+  </table>
+</body>
+</html>
