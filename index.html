@@ -15,15 +15,14 @@
       --text: #111827;
       --muted: #6b7280;
       --line: rgba(17,24,39,.08);
-      --primary: #5b5ce6;      /* 보라 */
-      --primary-2: #7c3aed;    /* 보라2 */
+      --primary: #5b5ce6;
+      --primary-2: #7c3aed;
       --success: #10b981;
       --warning: #f59e0b;
       --danger: #ef4444;
       --shadow: 0 10px 30px rgba(17,24,39,.10);
       --radius: 22px;
     }
-
     *{ box-sizing: border-box; }
     body{
       margin:0;
@@ -33,14 +32,7 @@
       padding: 18px;
     }
 
-    /* "폰 화면" 느낌 컨테이너 */
-    .phone{
-      max-width: 420px;
-      margin: 0 auto;
-      border-radius: 32px;
-      background: rgba(255,255,255,.55);
-      padding: 14px;
-    }
+    .phone{ max-width: 420px; margin: 0 auto; border-radius: 32px; background: rgba(255,255,255,.55); padding: 14px; }
     .app{
       background: rgba(255,255,255,.75);
       border: 1px solid rgba(255,255,255,.6);
@@ -50,88 +42,49 @@
       backdrop-filter: blur(10px);
     }
 
-    /* 상단 헤더 */
-    .topbar{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      margin-bottom: 14px;
-    }
-    .month{
-      font-size: 22px;
-      font-weight: 800;
-      letter-spacing: -.02em;
-    }
-    .right{
-      display:flex;
-      gap:10px;
-      align-items:center;
-    }
+    .topbar{ display:flex; align-items:center; justify-content:space-between; margin-bottom: 14px; }
+    .month{ font-size: 22px; font-weight: 800; letter-spacing: -.02em; }
+    .right{ display:flex; gap:10px; align-items:center; }
+
     .iconbtn{
-      width: 38px;
-      height: 38px;
-      border-radius: 12px;
+      width: 38px; height: 38px; border-radius: 12px;
       border: 1px solid var(--line);
       background: rgba(255,255,255,.9);
-      display:grid;
-      place-items:center;
-      cursor:pointer;
+      display:grid; place-items:center; cursor:pointer;
     }
     .iconbtn:active{ transform: translateY(1px); }
 
     .reload{
-      padding: 10px 12px;
-      border-radius: 12px;
-      border: 0;
-      cursor:pointer;
-      color: white;
-      font-weight: 700;
+      padding: 10px 12px; border-radius: 12px; border: 0; cursor:pointer;
+      color: white; font-weight: 700;
       background: linear-gradient(135deg, var(--primary), var(--primary-2));
       box-shadow: 0 10px 20px rgba(91,92,230,.25);
     }
     .reload:active{ transform: translateY(1px); }
 
-    /* 상태줄 */
     .statusline{
-      font-size: 12px;
-      color: var(--muted);
+      font-size: 12px; color: var(--muted);
       margin: 8px 0 14px;
-      display:flex;
-      gap:10px;
-      align-items:center;
-      flex-wrap:wrap;
+      display:flex; gap:10px; align-items:center; flex-wrap:wrap;
     }
     .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
+      display:inline-flex; align-items:center; gap:6px;
       border: 1px solid var(--line);
       background: rgba(255,255,255,.85);
       padding: 6px 10px;
       border-radius: 999px;
-      font-size: 12px;
-      color: var(--muted);
+      font-size: 12px; color: var(--muted);
     }
-    .dot{
-      width:8px; height:8px; border-radius:999px; background: var(--muted);
-      display:inline-block;
-    }
+    .dot{ width:8px; height:8px; border-radius:999px; background: var(--muted); display:inline-block; }
     .dot.ok{ background: var(--success); }
     .dot.bad{ background: var(--danger); }
 
-    /* 그룹/리스트 */
     .section-title{
-      font-weight: 800;
-      letter-spacing: -.02em;
+      font-weight: 800; letter-spacing: -.02em;
       margin: 14px 0 10px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
+      display:flex; align-items:center; justify-content:space-between;
     }
-    .section-title small{
-      color: var(--muted);
-      font-weight: 700;
-    }
+    .section-title small{ color: var(--muted); font-weight: 700; }
 
     .task{
       background: rgba(255,255,255,.92);
@@ -140,51 +93,67 @@
       padding: 12px 12px;
       display:flex;
       gap: 12px;
-      align-items:center;
+      align-items:flex-start;
       box-shadow: 0 10px 20px rgba(17,24,39,.06);
       margin-bottom: 10px;
     }
     .badge{
-      width: 44px;
-      height: 44px;
-      border-radius: 16px;
-      display:grid;
-      place-items:center;
+      width: 44px; height: 44px; border-radius: 16px;
+      display:grid; place-items:center;
       background: rgba(91,92,230,.12);
       border: 1px solid rgba(91,92,230,.22);
       color: var(--primary);
       font-weight: 900;
+      flex: 0 0 auto;
+      margin-top: 2px;
     }
     .task-main{ flex:1; min-width: 0; }
     .task-title{
-      font-weight: 900;
-      margin:0;
-      font-size: 14px;
-      letter-spacing: -.01em;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      font-weight: 900; margin:0; font-size: 14px; letter-spacing: -.01em;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
+
     .task-sub{
-      margin-top: 4px;
-      font-size: 12px;
-      color: var(--muted);
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-      align-items:center;
+      margin-top: 8px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
     }
+
     .chip{
-      font-size: 11px;
-      font-weight: 800;
-      padding: 5px 8px;
-      border-radius: 999px;
+      font-size: 11px; font-weight: 800;
+      padding: 7px 10px;
+      border-radius: 14px;
       border: 1px solid var(--line);
       background: rgba(255,255,255,.85);
       color: var(--muted);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 8px;
     }
+
     .chip.order{ background: rgba(245,158,11,.12); border-color: rgba(245,158,11,.25); color: #9a6b10; }
     .chip.none{ background: rgba(107,114,128,.10); border-color: rgba(107,114,128,.18); color: #6b7280; }
+
+    .chip input{
+      width: 70px;
+      border: 0;
+      outline: none;
+      background: transparent;
+      color: var(--text);
+      font-weight: 900;
+      font-variant-numeric: tabular-nums;
+      text-align: right;
+    }
+    .chip select{
+      border:0;
+      outline:none;
+      background: transparent;
+      color: var(--text);
+      font-weight: 900;
+    }
+    .chip .label{ opacity:.9; white-space: nowrap; }
 
     .need{
       font-variant-numeric: tabular-nums;
@@ -195,21 +164,39 @@
       background: rgba(255,255,255,.9);
       min-width: 58px;
       text-align: center;
+      flex: 0 0 auto;
+      align-self: center;
+      margin-top: 6px;
     }
     .need.good{ color: var(--danger); border-color: rgba(239,68,68,.25); background: rgba(239,68,68,.08); }
     .need.ok{ color: var(--success); border-color: rgba(16,185,129,.25); background: rgba(16,185,129,.08); }
     .need.zero{ color: var(--muted); }
 
-    .footer-note{
-      margin-top: 12px;
-      font-size: 12px;
-      color: var(--muted);
+    .actions{
+      display:flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: stretch;
+      margin-top: 6px;
     }
+    .savebtn{
+      padding: 8px 10px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.92);
+      cursor:pointer;
+      font-weight: 900;
+    }
+    .savebtn.primary{
+      color: white;
+      border: 0;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      box-shadow: 0 10px 18px rgba(91,92,230,.20);
+    }
+    .savebtn:disabled{ opacity: .6; cursor:not-allowed; }
 
-    .error{
-      color: var(--danger);
-      font-weight: 800;
-    }
+    .footer-note{ margin-top: 12px; font-size: 12px; color: var(--muted); }
+    .error{ color: var(--danger); font-weight: 800; }
   </style>
 </head>
 
@@ -220,9 +207,7 @@
         <div class="month" id="monthText">재고 현황</div>
         <div class="right">
           <button class="reload" id="reloadBtn" type="button">Reload</button>
-          <button class="iconbtn" id="openCsvBtn" type="button" title="CSV 열기" aria-label="CSV 열기">
-            🔗
-          </button>
+          <button class="iconbtn" id="openCsvBtn" type="button" title="CSV 열기" aria-label="CSV 열기">🔗</button>
         </div>
       </div>
 
@@ -235,15 +220,20 @@
       <div id="list"></div>
 
       <div class="footer-note">
-        스프레드시트에서 값 변경 → 이 페이지에서 <b>Reload</b> 누르면 최신 데이터로 갱신됩니다.
+        ✅ 스프레드시트 값 변경 → <b>Reload</b><br/>
+        ✅ 웹에서 값 수정 → <b>Save</b> → 스프레드시트에 반영
       </div>
     </div>
   </div>
 
 <script>
-  // ✅ 본인 CSV 링크 그대로 사용
+  /***** 1) 읽기(CSV) *****/
   const SHEET_URL =
     "https://docs.google.com/spreadsheets/d/e/2PACX-1vQj502UJ7RPuSmXEAGx6d5W4O9JKxrcz-zL7afDTJXOEYLOa2K1Tjw3118RrpNBjfjPNF0eV4s15BZX/pub?output=csv";
+
+  /***** 2) 쓰기(Apps Script Web App) *****/
+  const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbziRjAzN3ezrJ86decGH9_VfDDrYfcQplvz85w4DnnJG5kXCRb4CpAgjOH2Pz5MB5vGLA/exec"; // ✅ 여기! /exec 로 끝나는 URL 붙여넣기
+  const API_KEY = ""; // ✅ Apps Script의 API_KEY와 동일(테스트면 "")
 
   const statusText = document.getElementById("statusText");
   const dot = document.getElementById("dot");
@@ -265,11 +255,10 @@
     const s = String(h || "").trim();
     if (!s) return "";
     const low = s.toLowerCase();
-    if (low === "currcnt") return "Current"; // 오타 보정
+    if (low === "currcnt") return "Current";
     return s;
   }
 
-  // "subject" 같은 병합 셀로 생기는 빈칸을 위 값으로 채우기
   function forwardFill(rows, idx){
     let last = "";
     for (const r of rows){
@@ -295,8 +284,8 @@
   function needClass(need){
     const n = num(need);
     if (n === null) return "need zero";
-    if (n > 0) return "need ok";      // 부족(+): 주문 필요(초록으로 표시)
-    if (n < 0) return "need good";    // 초과(-): 빨강으로 표시
+    if (n > 0) return "need ok";
+    if (n < 0) return "need good";
     return "need zero";
   }
 
@@ -310,12 +299,70 @@
     return groups;
   }
 
+  function escapeHtml(s){
+    return String(s ?? "")
+      .replaceAll("&","&amp;")
+      .replaceAll("<","&lt;")
+      .replaceAll(">","&gt;")
+      .replaceAll('"',"&quot;")
+      .replaceAll("'","&#039;");
+  }
+
+  /***** JSONP 호출 (Apps Script CORS 회피용) *****/
+  function jsonp(url){
+    return new Promise((resolve, reject) => {
+      const cb = "cb_" + Math.random().toString(36).slice(2);
+      const script = document.createElement("script");
+      const timeout = setTimeout(() => {
+        cleanup();
+        reject(new Error("timeout"));
+      }, 12000);
+
+      window[cb] = (data) => {
+        cleanup();
+        resolve(data);
+      };
+
+      function cleanup(){
+        clearTimeout(timeout);
+        try { delete window[cb]; } catch(e) { window[cb] = undefined; }
+        script.remove();
+      }
+
+      script.onerror = () => {
+        cleanup();
+        reject(new Error("jsonp error"));
+      };
+
+      script.src = url + (url.includes("?") ? "&" : "?") + "callback=" + encodeURIComponent(cb);
+      document.body.appendChild(script);
+    });
+  }
+
+  async function updateToSheet({title, current, tobe, status, result}){
+    if (!WEBAPP_URL || WEBAPP_URL.includes("PUT_YOUR_EXEC_URL_HERE")) {
+      throw new Error("WEBAPP_URL을 /exec URL로 설정해 주세요.");
+    }
+
+    const qs = new URLSearchParams();
+    qs.set("action", "update");
+    qs.set("apiKey", API_KEY);
+    qs.set("title", title);
+    qs.set("current", current);
+    qs.set("tobe", tobe);
+    qs.set("status", status);
+    qs.set("result", result);
+    qs.set("t", String(Date.now())); // 캐시 방지
+
+    const url = WEBAPP_URL + (WEBAPP_URL.includes("?") ? "&" : "?") + qs.toString();
+    return await jsonp(url);
+  }
+
   function render(groups, idx){
     list.innerHTML = "";
 
     for (const [subject, rows] of groups.entries()){
       const section = document.createElement("div");
-
       const title = document.createElement("div");
       title.className = "section-title";
       title.innerHTML = `<span>Subject ${escapeHtml(subject)}</span><small>${rows.length} items</small>`;
@@ -334,10 +381,8 @@
 
         const h = document.createElement("p");
         h.className = "task-title";
-        h.textContent = String(r[idx.title] ?? "").trim();
-
-        const sub = document.createElement("div");
-        sub.className = "task-sub";
+        const rowTitle = String(r[idx.title] ?? "").trim();
+        h.textContent = rowTitle;
 
         const current = String(r[idx.current] ?? "").trim();
         const tobe = String(r[idx.tobe] ?? "").trim();
@@ -345,16 +390,74 @@
         const status = String(r[idx.status] ?? "").trim();
         const result = String(r[idx.result] ?? "").trim();
 
+        const sub = document.createElement("div");
+        sub.className = "task-sub";
+
         sub.innerHTML = `
-          <span class="chip">Current: <b>${escapeHtml(current)}</b></span>
-          <span class="chip">To be: <b>${escapeHtml(tobe)}</b></span>
-          <span class="${chipClass(status)}">Status: <b>${escapeHtml(status)}</b></span>
-          <span class="chip">Result: <b>${escapeHtml(result)}</b></span>
+          <div class="chip"><span class="label">Current</span>
+            <input type="number" class="inp-current" value="${escapeHtml(current)}" />
+          </div>
+          <div class="chip"><span class="label">To be</span>
+            <input type="number" class="inp-tobe" value="${escapeHtml(tobe)}" />
+          </div>
+          <div class="${chipClass(status)}"><span class="label">Status</span>
+            <select class="inp-status">
+              <option value="none" ${status.toLowerCase()==="none"?"selected":""}>none</option>
+              <option value="order" ${status.toLowerCase()==="order"?"selected":""}>order</option>
+            </select>
+          </div>
+          <div class="chip"><span class="label">Result</span>
+            <input type="text" class="inp-result" value="${escapeHtml(result)}" />
+          </div>
         `;
 
         const needBox = document.createElement("div");
         needBox.className = needClass(need);
         needBox.textContent = need;
+
+        const actions = document.createElement("div");
+        actions.className = "actions";
+
+        const saveBtn = document.createElement("button");
+        saveBtn.className = "savebtn primary";
+        saveBtn.textContent = "Save";
+
+        saveBtn.addEventListener("click", async () => {
+          try{
+            saveBtn.disabled = true;
+            setStatus(`저장 중… (${rowTitle})`, null);
+
+            const newCurrent = task.querySelector(".inp-current").value;
+            const newTobe = task.querySelector(".inp-tobe").value;
+            const newStatus = task.querySelector(".inp-status").value;
+            const newResult = task.querySelector(".inp-result").value;
+
+            const res = await updateToSheet({
+              title: rowTitle,
+              current: newCurrent,
+              tobe: newTobe,
+              status: newStatus,
+              result: newResult
+            });
+
+            if (!res || res.ok !== true) {
+              throw new Error(res?.error || "unknown error");
+            }
+
+            setStatus(`저장 완료 ✅ (${rowTitle})`, true);
+
+            // 저장 후 필요하면 자동 Reload (검증용)
+            await load();
+
+          }catch(e){
+            setStatus("저장 실패: " + (e?.message || e), false);
+            console.error(e);
+          }finally{
+            saveBtn.disabled = false;
+          }
+        });
+
+        actions.appendChild(saveBtn);
 
         main.appendChild(h);
         main.appendChild(sub);
@@ -362,21 +465,13 @@
         task.appendChild(badge);
         task.appendChild(main);
         task.appendChild(needBox);
+        task.appendChild(actions);
 
         section.appendChild(task);
       });
 
       list.appendChild(section);
     }
-  }
-
-  function escapeHtml(s){
-    return String(s ?? "")
-      .replaceAll("&","&amp;")
-      .replaceAll("<","&lt;")
-      .replaceAll(">","&gt;")
-      .replaceAll('"',"&quot;")
-      .replaceAll("'","&#039;");
   }
 
   async function load(){
@@ -386,38 +481,30 @@
       updatedAt.textContent = "-";
       list.innerHTML = "";
 
-      // ✅ 캐시 방지용 쿼리 (스프레드시트/넷플라이 캐시 때문에 갱신이 늦을 때가 있어요)
       const url = SHEET_URL + (SHEET_URL.includes("?") ? "&" : "?") + "t=" + Date.now();
-
       const res = await fetch(url, { cache: "no-store" });
       if (!res.ok) throw new Error("CSV fetch failed: " + res.status);
 
       const csvText = await res.text();
+      const parsed = Papa.parse(csvText, { skipEmptyLines: true });
 
-      const parsed = Papa.parse(csvText, {
-        skipEmptyLines: true
-      });
+      if (!parsed.data || parsed.data.length < 2) throw new Error("CSV 데이터가 비어있습니다.");
 
-      if (!parsed.data || parsed.data.length < 2){
-        throw new Error("CSV 데이터가 비어있습니다.");
-      }
-
-      // 헤더 찾기: Subject/Title 포함된 행을 헤더로 사용
       const rows = parsed.data.map(r => r.map(c => String(c ?? "")));
+
+      // 헤더 찾기
       let headerRowIndex = -1;
       for (let i=0; i<rows.length; i++){
         const low = rows[i].map(x => x.trim().toLowerCase());
         if (low.includes("subject") && low.includes("title")){
-          headerRowIndex = i;
-          break;
+          headerRowIndex = i; break;
         }
       }
       if (headerRowIndex === -1) headerRowIndex = 0;
 
       const headers = rows[headerRowIndex].map(normalizeHeader);
-      const dataRows = rows.slice(headerRowIndex + 1);
+      const dataRows = rows.slice(headerRowIndex + 1).filter(r => r.some(v => String(v ?? "").trim() !== ""));
 
-      // 필요한 컬럼 인덱스 매핑
       const hLow = headers.map(h => String(h).trim().toLowerCase());
       const idx = {
         subject: hLow.indexOf("subject"),
@@ -429,32 +516,17 @@
         result: hLow.indexOf("result")
       };
 
-      // 최소 컬럼 체크
-      if (idx.subject < 0 || idx.title < 0){
-        throw new Error("헤더에 Subject/Title 컬럼이 없습니다. (스프레드시트 헤더 확인 필요)");
-      }
+      if (idx.subject < 0 || idx.title < 0) throw new Error("헤더에 Subject/Title 컬럼이 없습니다.");
 
-      // 빈 행 제거
-      const cleaned = dataRows.filter(r => r.some(v => String(v ?? "").trim() !== ""));
+      forwardFill(dataRows, idx.subject);
 
-      // ✅ Subject Forward Fill (병합 셀 대응)
-      forwardFill(cleaned, idx.subject);
-
-      // 그룹화 후 렌더
-      const groups = groupBySubject(cleaned, idx.subject);
+      const groups = groupBySubject(dataRows, idx.subject);
       render(groups, idx);
 
-      rowsCount.textContent = String(cleaned.length);
+      rowsCount.textContent = String(dataRows.length);
       updatedAt.textContent = new Date().toLocaleString();
       setStatus("정상 로드 완료", true);
+
     }catch(e){
       setStatus("로드 실패: " + (e?.message || e), false);
-      list.innerHTML = `<div class="error">데이터를 불러오지 못했습니다. (CSV 공개/헤더/권한 확인)</div>`;
-      console.error(e);
-    }
-  }
-
-  load();
-</script>
-</body>
-</html>
+      list.innerHTML = `<div class="error">데이터를 불러오지 못했습니다.
