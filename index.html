@@ -1,39 +1,460 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Inventory Data</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>재고 현황</title>
+
+  <!-- CSV 파싱 (따옴표/쉼표/줄바꿈 안전) -->
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
   <style>
-    body { font-family: Arial, sans-serif; margin: 40px; background-color: #f4f4f4; }
-    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-    th { background-color: #333; color: white; }
-    tr:nth-child(even) { background-color: #f9f9f9; }
-    button { margin-top: 20px; padding: 10px 15px; font-size: 14px; }
+    :root{
+      --bg: #eef1ff;
+      --card: #ffffff;
+      --text: #111827;
+      --muted: #6b7280;
+      --line: rgba(17,24,39,.08);
+      --primary: #5b5ce6;      /* 보라 */
+      --primary-2: #7c3aed;    /* 보라2 */
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --shadow: 0 10px 30px rgba(17,24,39,.10);
+      --radius: 22px;
+    }
+
+    *{ box-sizing: border-box; }
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(1200px 700px at 20% 10%, #ffffff 0%, var(--bg) 55%, #f6f7ff 100%);
+      color: var(--text);
+      padding: 18px;
+    }
+
+    /* "폰 화면" 느낌 컨테이너 */
+    .phone{
+      max-width: 420px;
+      margin: 0 auto;
+      border-radius: 32px;
+      background: rgba(255,255,255,.55);
+      padding: 14px;
+    }
+    .app{
+      background: rgba(255,255,255,.75);
+      border: 1px solid rgba(255,255,255,.6);
+      border-radius: 28px;
+      padding: 18px 16px 16px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    /* 상단 헤더 */
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom: 14px;
+    }
+    .month{
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -.02em;
+    }
+    .right{
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+    .iconbtn{
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.9);
+      display:grid;
+      place-items:center;
+      cursor:pointer;
+    }
+    .iconbtn:active{ transform: translateY(1px); }
+
+    .reload{
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 0;
+      cursor:pointer;
+      color: white;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      box-shadow: 0 10px 20px rgba(91,92,230,.25);
+    }
+    .reload:active{ transform: translateY(1px); }
+
+    /* 상태줄 */
+    .statusline{
+      font-size: 12px;
+      color: var(--muted);
+      margin: 8px 0 14px;
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.85);
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .dot{
+      width:8px; height:8px; border-radius:999px; background: var(--muted);
+      display:inline-block;
+    }
+    .dot.ok{ background: var(--success); }
+    .dot.bad{ background: var(--danger); }
+
+    /* 그룹/리스트 */
+    .section-title{
+      font-weight: 800;
+      letter-spacing: -.02em;
+      margin: 14px 0 10px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .section-title small{
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .task{
+      background: rgba(255,255,255,.92);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 12px 12px;
+      display:flex;
+      gap: 12px;
+      align-items:center;
+      box-shadow: 0 10px 20px rgba(17,24,39,.06);
+      margin-bottom: 10px;
+    }
+    .badge{
+      width: 44px;
+      height: 44px;
+      border-radius: 16px;
+      display:grid;
+      place-items:center;
+      background: rgba(91,92,230,.12);
+      border: 1px solid rgba(91,92,230,.22);
+      color: var(--primary);
+      font-weight: 900;
+    }
+    .task-main{ flex:1; min-width: 0; }
+    .task-title{
+      font-weight: 900;
+      margin:0;
+      font-size: 14px;
+      letter-spacing: -.01em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .task-sub{
+      margin-top: 4px;
+      font-size: 12px;
+      color: var(--muted);
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .chip{
+      font-size: 11px;
+      font-weight: 800;
+      padding: 5px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.85);
+      color: var(--muted);
+    }
+    .chip.order{ background: rgba(245,158,11,.12); border-color: rgba(245,158,11,.25); color: #9a6b10; }
+    .chip.none{ background: rgba(107,114,128,.10); border-color: rgba(107,114,128,.18); color: #6b7280; }
+
+    .need{
+      font-variant-numeric: tabular-nums;
+      font-weight: 900;
+      padding: 6px 10px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.9);
+      min-width: 58px;
+      text-align: center;
+    }
+    .need.good{ color: var(--danger); border-color: rgba(239,68,68,.25); background: rgba(239,68,68,.08); }
+    .need.ok{ color: var(--success); border-color: rgba(16,185,129,.25); background: rgba(16,185,129,.08); }
+    .need.zero{ color: var(--muted); }
+
+    .footer-note{
+      margin-top: 12px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .error{
+      color: var(--danger);
+      font-weight: 800;
+    }
   </style>
 </head>
+
 <body>
-  <h1>재고 현황</h1>
-  <button onclick="location.reload();">데이터 다시 불러오기</button>
-  <table>
-    <thead>
-      <tr>
-        <th>Subject</th>
-        <th>Title</th>
-        <th>Current</th>
-        <th>to be</th>
-        <th>Need</th>
-        <th>Status</th>
-        <th>Result</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr><td>A</td><td>항목-001</td><td>15</td><td>5</td><td>-10</td><td>none</td><td>-</td></tr>
-      <tr><td>A</td><td>항목-002</td><td>3</td><td>5</td><td>2</td><td>order</td><td>-</td></tr>
-      <tr><td>A</td><td>항목-003</td><td>2</td><td>5</td><td>3</td><td>order</td><td>-</td></tr>
-      <!-- 나머지 데이터 행도 같은 방식으로 추가 -->
-    </tbody>
-  </table>
+  <div class="phone">
+    <div class="app">
+      <div class="topbar">
+        <div class="month" id="monthText">재고 현황</div>
+        <div class="right">
+          <button class="reload" id="reloadBtn" type="button">Reload</button>
+          <button class="iconbtn" id="openCsvBtn" type="button" title="CSV 열기" aria-label="CSV 열기">
+            🔗
+          </button>
+        </div>
+      </div>
+
+      <div class="statusline" id="statusLine">
+        <span class="pill"><span class="dot" id="dot"></span><span id="statusText">불러오는 중…</span></span>
+        <span class="pill">Rows: <b id="rowsCount">-</b></span>
+        <span class="pill">Updated: <b id="updatedAt">-</b></span>
+      </div>
+
+      <div id="list"></div>
+
+      <div class="footer-note">
+        스프레드시트에서 값 변경 → 이 페이지에서 <b>Reload</b> 누르면 최신 데이터로 갱신됩니다.
+      </div>
+    </div>
+  </div>
+
+<script>
+  // ✅ 본인 CSV 링크 그대로 사용
+  const SHEET_URL =
+    "https://docs.google.com/spreadsheets/d/e/2PACX-1vQj502UJ7RPuSmXEAGx6d5W4O9JKxrcz-zL7afDTJXOEYLOa2K1Tjw3118RrpNBjfjPNF0eV4s15BZX/pub?gid=0&single=true&output=csv";
+
+  const statusText = document.getElementById("statusText");
+  const dot = document.getElementById("dot");
+  const rowsCount = document.getElementById("rowsCount");
+  const updatedAt = document.getElementById("updatedAt");
+  const list = document.getElementById("list");
+
+  document.getElementById("reloadBtn").addEventListener("click", load);
+  document.getElementById("openCsvBtn").addEventListener("click", () => window.open(SHEET_URL, "_blank"));
+
+  function setStatus(msg, ok=null){
+    statusText.textContent = msg;
+    dot.classList.remove("ok","bad");
+    if (ok === true) dot.classList.add("ok");
+    if (ok === false) dot.classList.add("bad");
+  }
+
+  function normalizeHeader(h){
+    const s = String(h || "").trim();
+    if (!s) return "";
+    const low = s.toLowerCase();
+    if (low === "currcnt") return "Current"; // 오타 보정
+    return s;
+  }
+
+  // "Subject" 같은 병합 셀로 생기는 빈칸을 위 값으로 채우기
+  function forwardFill(rows, idx){
+    let last = "";
+    for (const r of rows){
+      const v = String(r[idx] ?? "").trim();
+      if (v) last = v;
+      else r[idx] = last;
+    }
+    return rows;
+  }
+
+  function num(v){
+    const n = Number(String(v ?? "").trim());
+    return Number.isFinite(n) ? n : null;
+  }
+
+  function chipClass(status){
+    const s = String(status ?? "").trim().toLowerCase();
+    if (s === "order") return "chip order";
+    if (s === "none") return "chip none";
+    return "chip";
+  }
+
+  function needClass(need){
+    const n = num(need);
+    if (n === null) return "need zero";
+    if (n > 0) return "need ok";      // 부족(+): 주문 필요(초록으로 표시)
+    if (n < 0) return "need good";    // 초과(-): 빨강으로 표시
+    return "need zero";
+  }
+
+  function groupBySubject(rows, subjectIdx){
+    const groups = new Map();
+    for (const r of rows){
+      const s = String(r[subjectIdx] ?? "").trim() || "(no subject)";
+      if (!groups.has(s)) groups.set(s, []);
+      groups.get(s).push(r);
+    }
+    return groups;
+  }
+
+  function render(groups, idx){
+    list.innerHTML = "";
+
+    for (const [subject, rows] of groups.entries()){
+      const section = document.createElement("div");
+
+      const title = document.createElement("div");
+      title.className = "section-title";
+      title.innerHTML = `<span>Subject ${escapeHtml(subject)}</span><small>${rows.length} items</small>`;
+      section.appendChild(title);
+
+      rows.forEach(r => {
+        const task = document.createElement("div");
+        task.className = "task";
+
+        const badge = document.createElement("div");
+        badge.className = "badge";
+        badge.textContent = subject;
+
+        const main = document.createElement("div");
+        main.className = "task-main";
+
+        const h = document.createElement("p");
+        h.className = "task-title";
+        h.textContent = String(r[idx.title] ?? "").trim();
+
+        const sub = document.createElement("div");
+        sub.className = "task-sub";
+
+        const current = String(r[idx.current] ?? "").trim();
+        const tobe = String(r[idx.tobe] ?? "").trim();
+        const need = String(r[idx.need] ?? "").trim();
+        const status = String(r[idx.status] ?? "").trim();
+        const result = String(r[idx.result] ?? "").trim();
+
+        sub.innerHTML = `
+          <span class="chip">Current: <b>${escapeHtml(current)}</b></span>
+          <span class="chip">To be: <b>${escapeHtml(tobe)}</b></span>
+          <span class="${chipClass(status)}">Status: <b>${escapeHtml(status)}</b></span>
+          <span class="chip">Result: <b>${escapeHtml(result)}</b></span>
+        `;
+
+        const needBox = document.createElement("div");
+        needBox.className = needClass(need);
+        needBox.textContent = need;
+
+        main.appendChild(h);
+        main.appendChild(sub);
+
+        task.appendChild(badge);
+        task.appendChild(main);
+        task.appendChild(needBox);
+
+        section.appendChild(task);
+      });
+
+      list.appendChild(section);
+    }
+  }
+
+  function escapeHtml(s){
+    return String(s ?? "")
+      .replaceAll("&","&amp;")
+      .replaceAll("<","&lt;")
+      .replaceAll(">","&gt;")
+      .replaceAll('"',"&quot;")
+      .replaceAll("'","&#039;");
+  }
+
+  async function load(){
+    try{
+      setStatus("불러오는 중…", null);
+      rowsCount.textContent = "-";
+      updatedAt.textContent = "-";
+      list.innerHTML = "";
+
+      // ✅ 캐시 방지용 쿼리 (스프레드시트/넷플라이 캐시 때문에 갱신이 늦을 때가 있어요)
+      const url = SHEET_URL + (SHEET_URL.includes("?") ? "&" : "?") + "t=" + Date.now();
+
+      const res = await fetch(url, { cache: "no-store" });
+      if (!res.ok) throw new Error("CSV fetch failed: " + res.status);
+
+      const csvText = await res.text();
+
+      const parsed = Papa.parse(csvText, {
+        skipEmptyLines: true
+      });
+
+      if (!parsed.data || parsed.data.length < 2){
+        throw new Error("CSV 데이터가 비어있습니다.");
+      }
+
+      // 헤더 찾기: Subject/Title 포함된 행을 헤더로 사용
+      const rows = parsed.data.map(r => r.map(c => String(c ?? "")));
+      let headerRowIndex = -1;
+      for (let i=0; i<rows.length; i++){
+        const low = rows[i].map(x => x.trim().toLowerCase());
+        if (low.includes("subject") && low.includes("title")){
+          headerRowIndex = i;
+          break;
+        }
+      }
+      if (headerRowIndex === -1) headerRowIndex = 0;
+
+      const headers = rows[headerRowIndex].map(normalizeHeader);
+      const dataRows = rows.slice(headerRowIndex + 1);
+
+      // 필요한 컬럼 인덱스 매핑
+      const hLow = headers.map(h => String(h).trim().toLowerCase());
+      const idx = {
+        subject: hLow.indexOf("subject"),
+        title: hLow.indexOf("title"),
+        current: hLow.indexOf("current"),
+        tobe: hLow.indexOf("to be"),
+        need: hLow.indexOf("need"),
+        status: hLow.indexOf("status"),
+        result: hLow.indexOf("result")
+      };
+
+      // 최소 컬럼 체크
+      if (idx.subject < 0 || idx.title < 0){
+        throw new Error("헤더에 Subject/Title 컬럼이 없습니다. (스프레드시트 헤더 확인 필요)");
+      }
+
+      // 빈 행 제거
+      const cleaned = dataRows.filter(r => r.some(v => String(v ?? "").trim() !== ""));
+
+      // ✅ Subject Forward Fill (병합 셀 대응)
+      forwardFill(cleaned, idx.subject);
+
+      // 그룹화 후 렌더
+      const groups = groupBySubject(cleaned, idx.subject);
+      render(groups, idx);
+
+      rowsCount.textContent = String(cleaned.length);
+      updatedAt.textContent = new Date().toLocaleString();
+      setStatus("정상 로드 완료", true);
+    }catch(e){
+      setStatus("로드 실패: " + (e?.message || e), false);
+      list.innerHTML = `<div class="error">데이터를 불러오지 못했습니다. (CSV 공개/헤더/권한 확인)</div>`;
+      console.error(e);
+    }
+  }
+
+  load();
+</script>
 </body>
 </html>
